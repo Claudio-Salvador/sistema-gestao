@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Form;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class testController extends Controller
 {
@@ -17,7 +18,7 @@ class testController extends Controller
     {
         $user=User::all();
         return view('Teste/listAlluser',[
-            'Users' =>$user
+            'Users'=>$user
 
         ]);
     }
@@ -29,7 +30,7 @@ class testController extends Controller
      */
     public function create()
     {
-        //
+       return view('teste/novo');
     }
 
     /**
@@ -40,7 +41,13 @@ class testController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $user=new User();
+       $user->name=$request->name;
+       $user->email=$request->email;
+       $user->password=Hash::make($request->passord);
+       $user->save();
+
+       return redirect()->route('user.index');
     }
 
     /**
@@ -51,7 +58,10 @@ class testController extends Controller
      */
     public function show(User $user)
     {
-        //
+            
+        return view ('teste/listUser',[
+            'user'=>$user
+        ]);
     }
 
     /**
@@ -62,7 +72,9 @@ class testController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('Teste/editar',[
+            'user' =>$user
+        ]);
     }
 
     /**
@@ -74,7 +86,12 @@ class testController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->passord);
+        $user->save();
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -85,6 +102,8 @@ class testController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+       $user-> delete();
+       return redirect()-> route('user.index');
+
     }
 }

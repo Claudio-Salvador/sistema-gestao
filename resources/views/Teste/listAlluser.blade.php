@@ -7,23 +7,33 @@
     <title>Document</title>
 </head>
 <body>
-    
-<table>
-    <tr>
-        <td>Nome</td>
-        <td>Email</td>
-        <td>Acçao</td>
+<center>
+<h1>LISTAR USUÁRIO</h1>
+    <table>
+        <tr>
+        <td>ID</td>
+        <td>NAME</td>
+        <td>EMAIL</td>
+        <td>ACTION</td>
     </tr>
+
     @foreach ($Users as $user)   
     <tr>
+        <td>{{$user->id}}</td>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
-        <td>{{$user->created_at}}</td>
-        
-      
+        <td>
+            <a href="{{route('user.show',['user' => $user->id])  }}">Ver Dados</a>
+            <form action="{{route('user.destroy',['user'=>$user->id ])}}" method="post">
+                @csrf
+                @method('delete') 
+                <input type="submit" value="Remover">    
+            </form>     
+        </td> 
     </tr>
     @endforeach
 </table>
+</center>
 
 </body>
 </html>
