@@ -13,8 +13,12 @@ class EmpresaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view ('sistema.empresa');
+    {   
+        
+        $empresas=empresa::all();
+        return view ('sistema.empresa',[
+            'empresas' =>$empresas
+            ]);
     }
 
     /**
@@ -24,7 +28,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('sistema.empresa.novo');
+           
     }
 
     /**
@@ -35,7 +41,18 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empresa=new empresa();
+        $empresa->nome_empresa=$request->empresaNome;
+        $empresa->email=$request->empresaEmail;
+        $empresa->telefone=$request->empresaTelefone;
+        $empresa->site=$request->empresaWebsite;
+        $empresa->descricao=$request->empresaDescricao;
+        
+        $empresa->save();
+        
+
+        return redirect()->route('sistema.empresa');
+
     }
 
     /**
@@ -44,9 +61,16 @@ class EmpresaController extends Controller
      * @param  \App\empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(empresa $empresa)
+    public function show(empresa  $empresa)
     {
-        //
+       if($empresa){
+           return view ('sistema.empresa.ver',[
+               'empresa' =>$empresa
+               ]);
+
+            }else{     
+                return redirect()->route('sistema.empresa');
+        }
     }
 
     /**

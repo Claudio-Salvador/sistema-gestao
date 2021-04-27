@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class empresa extends Model
+class sobre extends Model
 {
-    protected $fillabe=[''];
+    //
 }
