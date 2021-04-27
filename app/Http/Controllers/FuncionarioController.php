@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Empresa;
+namespace App\Http\Controllers;
 
-use App\empresaModel;
+use App\funcionario;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class empresaController extends Controller
+class FuncionarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class empresaController extends Controller
      */
     public function index()
     {
-        //
+       return view('sistema.funcionario');
     }
 
     /**
@@ -42,10 +41,10 @@ class empresaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\empresaModel  $empresaModel
+     * @param  \App\funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
-    public function show(empresaModel $empresaModel)
+    public function show(funcionario $funcionario)
     {
         //
     }
@@ -53,10 +52,10 @@ class empresaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\empresaModel  $empresaModel
+     * @param  \App\funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
-    public function edit(empresaModel $empresaModel)
+    public function edit(funcionario $funcionario)
     {
         //
     }
@@ -65,10 +64,10 @@ class empresaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\empresaModel  $empresaModel
+     * @param  \App\funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, empresaModel $empresaModel)
+    public function update(Request $request, funcionario $funcionario)
     {
         //
     }
@@ -76,10 +75,10 @@ class empresaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\empresaModel  $empresaModel
+     * @param  \App\funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(empresaModel $empresaModel)
+    public function destroy(funcionario $funcionario)
     {
         //
     }
