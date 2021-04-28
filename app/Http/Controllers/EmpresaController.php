@@ -63,27 +63,32 @@ class EmpresaController extends Controller
      */
     public function show(empresa  $empresa)
     {
-       if($empresa){
+        
+        $funcionarios=$empresa->funcionario()->get();
+        if($empresa){
            return view ('sistema.empresa.ver',[
-               'empresa' =>$empresa
+               'empresa' =>$empresa,
+               'funcionarios' => $funcionarios
                ]);
-
             }else{     
                 return redirect()->route('sistema.empresa');
+            }
         }
+        
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param  \App\empresa  $empresa
+         * @return \Illuminate\Http\Response
+         */
+        public function edit(empresa $empresa)
+        {
+            
+            return view('sistema.empresa.editar',[
+                'empresa' =>$empresa
+            ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\empresa  $empresa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(empresa $empresa)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -93,9 +98,18 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, empresa $empresa)
     {
-        //
-    }
+       $empresa->nome_empresa=$request->empresaNome;
+       $empresa->email=$request->empresaEmail;
+       $empresa->telefone=$request->empresaTelefone;
+       $empresa->site=$request->empresaWebsite;
+       $empresa->descricao=$request->empresaDescricao;
+       $empresa->save();
+       return redirect()->route('sistema.empresa');
+       
+       
 
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -104,6 +118,8 @@ class EmpresaController extends Controller
      */
     public function destroy(empresa $empresa)
     {
-        //
+        $empresa->delete();  
+        return redirect()->route('sistema.empresa');
+        
     }
 }

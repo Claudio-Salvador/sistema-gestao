@@ -9,5 +9,31 @@
     <h4>Telefone:{{$empresa->telefone}}</h4>
     <h4>Website: <a href="{{$empresa->site}}" target="_blank">{{$empresa->site}}</a></h2>
     <p>{{$empresa->descricao}}</p>
+
+    <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Email</th>
+                <th scope="col">naturalidade</th>
+
+                </tr>
+            </thead>
+            <tbody>
+               
+            @foreach ($funcionarios as $funcionário)     
+            <tr>
+                <th scope="row">{{$funcionário->id}}</th>
+                <td>{{$funcionário->nome}}</td>
+                <td>+244{{$funcionário->telefone}}</td>
+                <td>{{$funcionário->email}}</td>
+                <td>{{$funcionário->naturalidade}}</td>
+                </tr>
+                
+                @endforeach
+            </tbody>
+        </table>
 </div> 
 @endsection

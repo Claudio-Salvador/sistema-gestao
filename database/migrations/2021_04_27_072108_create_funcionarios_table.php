@@ -16,14 +16,14 @@ class CreateFuncionariosTable extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('id_empresa');
+            $table->unsignedBigInteger('empresa_id');
 
             $table->string('nome');
             $table->string('email');
             $table->integer('telefone');
             $table->string('naturalidade');
 
-            $table->foreign('id_empresa')->references('id')->on('empresas')->onDelete('CASCADE');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

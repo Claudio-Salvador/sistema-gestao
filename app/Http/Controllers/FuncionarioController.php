@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\empresa;
 use App\funcionario;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,15 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-       return view('sistema.funcionario');
-    }
+
+        // $funcionario1 = new funcionario();
+        // $trabalha = $funcionario1->empresaR();
+        $funcionarios=funcionario::all();
+   
+       return view('sistema.funcionario',[
+           'funcionarios'=> $funcionarios,
+           ]);
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +32,9 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        $empresas=new empresa();
+        $empresas=empresa::all();
+        return view('sistema.funcionario.novo',['empresas' =>$empresas]);
     }
 
     /**
@@ -35,7 +45,18 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $funcionario = new funcionario();
+
+        $funcionario->nome = $request->funcionarioNome;
+        $funcionario->email = $request->funcionarioEmail;
+        $funcionario->empresa_id = $request->funcionarioIduser;
+        $funcionario->telefone = $request->funcionarioTelefone;
+        $funcionario->naturalidade = $request->funcionarioNaturalidade;
+
+        $funcionario->save();
+
+
+        return redirect()->route('sistema.funcionario');
     }
 
     /**
@@ -46,7 +67,11 @@ class FuncionarioController extends Controller
      */
     public function show(funcionario $funcionario)
     {
-        //
+        $trabalha=$funcionario->empresaR()->first();
+        return view('sistema.funcionario.ver', [
+            'funcionario' => $funcionario,
+            'empresa' => $trabalha
+        ]);
     }
 
     /**
@@ -57,7 +82,13 @@ class FuncionarioController extends Controller
      */
     public function edit(funcionario $funcionario)
     {
-        //
+        $empresas=new empresa();
+        $empresas=$empresas::all();
+        
+        return view('sistema.funcionario.editar', [
+            'funcionario' => $funcionario,
+            'empresas' =>$empresas
+        ]);
     }
 
     /**
@@ -69,9 +100,20 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, funcionario $funcionario)
     {
-        //
-    }
+      
 
+        $funcionario->nome = $request->funcionarioNome;
+        $funcionario->email = $request->funcionarioEmail;
+        $funcionario->empresa_id = $request->funcionarioIduser;
+        $funcionario->telefone = $request->funcionarioTelefone;
+        $funcionario->naturalidade = $request->funcionarioNaturalidade;
+
+        $funcionario->save();
+
+
+        return redirect()->route('sistema.funcionario');
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +122,8 @@ class FuncionarioController extends Controller
      */
     public function destroy(funcionario $funcionario)
     {
-        //
+        $funcionario->delete();
+        return redirect()->route('sistema.funcionario');
+        
     }
 }

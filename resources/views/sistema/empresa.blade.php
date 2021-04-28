@@ -30,13 +30,18 @@
               
 
                 <td>
-                    <a href="{{route('sistema.empresaShow',['empresa'=>$empresa->id])}}" class="btn btn-info lg-2 ">Ver</a>
+                    <a href="{{route('sistema.empresaShow',['empresa'=>$empresa->id])}}" c lass="btn btn-info lg-2 ">Ver</a>
                 </td>
                 <td>
-                    <a href="{{route('sistema.empresaShow',['empresa'=>$empresa->id])}}" class="btn btn-success lg-2 ">Editar</a> 
+                    <a href="{{route('sistema.empresaEdit',['empresa'=>$empresa->id])}}" class="btn btn-success lg-2 ">Editar</a> 
                 </td>
                 <td>
-                    <a href="{{route('sistema.empresaShow',['empresa'=>$empresa->id])}}" class="btn btn-danger lg-2 ">X</a>
+                    <form action="{{route('sistema.empresaDeletar',['empresa'=>$empresa->id])}}" method="POST">
+                        @csrf
+                        @method('put')
+                      
+                        <input type="submit" class="btn btn-danger" value="X">
+                    </form>
                 </td>
                 
                 </tr>
