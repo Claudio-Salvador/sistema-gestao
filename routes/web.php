@@ -2,9 +2,10 @@
 
 
 
-Route::get('/', function () {
-    return view('sistema.home');
-})->name('sistema.home');
+Route::get('/', 'UsuarioController@index')->name('sistema.home');
+Route::get('/Sistema-de-acesso', 'UsuarioController@FormLogin')->name('Formlogin');
+Route::get('/Sistema-de-acesso/logout', 'UsuarioController@logout')->name('logout');
+Route::post('/Sistema-de-acesso/login', 'UsuarioController@logar')->name('logar');
 
 
 
@@ -43,4 +44,4 @@ Route::prefix('goffice')->group (function(){
     
 });
 // Route::get('usuario','controllerMenu@Sobre')->name('menu.sobre');
-Route::resource('usuarios','Form\\testController')->names('user')->parameters(['usuarios' =>'user']);
+// Route::resource('usuarios','Form\\testController')->names('user')->parameters(['usuarios' =>'user']);

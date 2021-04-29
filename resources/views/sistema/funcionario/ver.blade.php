@@ -16,7 +16,6 @@
         <p>Criado:{{$funcionario->created_at}}</p>
         
         <center>
-    
             <h1>Empresa onde trabalha</h1>
         </center>
     

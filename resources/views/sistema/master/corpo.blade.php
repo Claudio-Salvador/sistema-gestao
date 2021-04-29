@@ -28,7 +28,10 @@
           </li>       
           <li class="nav-item">
             <a class="nav-link" href="#">Outros</a>
-          </li>       
+          </li>  
+          @if (Auth::check()===true)  
+          <a class="nav-link btn-danger my-2 my-sm-0" href="{{route('logout')}}">Terminar sessão</a>
+          @endif     
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Faça sua busca..." aria-label="Search">
